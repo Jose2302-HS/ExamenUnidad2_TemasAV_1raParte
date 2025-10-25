@@ -5,6 +5,9 @@ from datetime import date
 from conexion import obtener_estudiantes, agregar_estudiante
 from graficos import grafico_pareto, grafico_dispersion
 from asistencia import registrar_asistencia, obtener_asistencias
+from catalogos import vista_catalogos
+from inscripciones import vista_inscripciones
+
 
 # Configuración del dashboard
 st.set_page_config(page_title="Sistema de Gestión Académica", layout="wide")
@@ -12,7 +15,7 @@ st.set_page_config(page_title="Sistema de Gestión Académica", layout="wide")
 st.title("🎓 Sistema de Gestión Académica - TecNM Tijuana")
 
 # --- Barra de navegación (pestañas superiores) ---
-tabs = st.tabs(["📋 Registro de Estudiantes", "🗓️ Asistencia", "⚠️ Factores de Reprobación", "📈 Gráficas", "📄 Reportes"])
+tabs = st.tabs(["📋 Registro de Estudiantes", "🗓️ Asistencia","⚠️ Factores de Reprobación", "📈 Gráficas", "📄 Reportes","Catalogos" ,"Inscripciones",])
 
 # =====================================================================
 # 📋 TAB 1 - REGISTRO DE ESTUDIANTES
@@ -176,3 +179,13 @@ with tabs[4]:
                         file_name="reporte_calidad.pdf",
                         mime="application/pdf",
                     )
+# =====================================================================
+# 📄 TAB 5 - Catalogos
+# =====================================================================
+with tabs[5]:
+    vista_catalogos()
+# =====================================================================
+# 📄 TAB 5 - Inscripciones
+# =====================================================================
+with tabs[6]:
+    vista_inscripciones()
