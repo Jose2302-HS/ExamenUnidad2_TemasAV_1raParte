@@ -92,3 +92,61 @@ def grafico_ishikawa(df_factores):
     plt.xticks(fontsize=7)
     plt.yticks(fontsize=7)
     st.pyplot(fig, use_container_width=False)
+
+
+# ======================================
+# NUEVOS GRÁFICOS BASADOS EN INSCRIPCIONES
+# ======================================
+from conexion import supabase  # usa la conexión ya existente
+
+def grafico_promedio_materias():
+    """Gráfico de promedio final por materia a partir de inscripciones."""
+    st.subheader("📚 Promedio de Calificaciones por Materia")
+
+    try:
+        datos = supabase.table("inscripciones").select("calif_final, grupos(materias(nombre))").execute()
+        df = pd.json_normalize(datos.data)
+        if df.empty:
+            st.warning("No hay datos de inscripciones para mostrar.")
+            return
+
+        df = df.groupby("grupos.materias.nombre")["calif_final"].mean().reset_index()
+
+        fig, ax = plt.subplots(figsize=(5,3))
+        ax.bar(df["grupos.materias.nombre"], df["calif_final"], color="orchid")
+        ax.set_xlabel("Materia", fontsize=8)
+        ax.set_ylabel("Promedio", fontsize=8)
+        ax.set_title("Promedio Final por Materia", fontsize=10)
+        plt.xticks(rotation=25, fontsize=7)
+        plt.yticks(fontsize=7)
+        st.pyplot(fig, use_container_width=False)
+    except Exception as e:
+        st.error(f"Error al generar gráfico: {e}")
+
+
+def grafico_reprobacion_materias():
+    """Gráfico del porcentaje de reprobación por materia."""
+    st.subheader("📉 Porcentaje de Reprobación por Materia")
+
+    try:
+        datos = supabase.table("inscripciones").select("reprobado, grupos(materias(nombre))").execute()
+        df = pd.json_normalize(datos.data)
+        if df.empty:
+            st.warning("No hay inscripciones registradas.")
+            return
+
+        df["reprobado"] = df["reprobado"].astype(int)
+        resumen = df.groupby("grupos.materias.nombre")["reprobado"].mean().reset_index()
+        resumen["% Reprobación"] = resumen["reprobado"] * 100
+
+        fig, ax = plt.subplots(figsize=(5,3))
+        ax.bar(resumen["grupos.materias.nombre"], resumen["% Reprobación"], color="tomato")
+        ax.set_xlabel("Materia", fontsize=8)
+        ax.set_ylabel("% Reprobación", fontsize=8)
+        ax.set_title("Tasa de Reprobación", fontsize=10)
+        plt.xticks(rotation=25, fontsize=7)
+        plt.yticks(fontsize=7)
+        st.pyplot(fig, use_container_width=False)
+    except Exception as e:
+        st.error(f"Error al generar gráfico: {e}")
+

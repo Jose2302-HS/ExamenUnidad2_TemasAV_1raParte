@@ -64,3 +64,56 @@ def exportar_pdf(df_estudiantes, df_asistencias, df_factores, ruta="reporte_cali
 
     doc.build(story)
     return ruta
+
+
+from conexion import supabase
+
+def exportar_pdf_avanzado(ruta="reporte_academico.pdf"):
+    """Genera un reporte más completo con información de inscripciones."""
+    from reportlab.pdfgen import canvas
+    from reportlab.lib.pagesizes import letter
+    from io import BytesIO
+
+    try:
+        datos = supabase.table("inscripciones").select("calif_final, reprobado, grupos(materias(nombre))").execute()
+        df = pd.json_normalize(datos.data)
+        if df.empty:
+            st.warning("No hay datos en inscripciones para generar el reporte.")
+            return None
+
+        promedio = df.groupby("grupos.materias.nombre")["calif_final"].mean()
+        reprob = df.groupby("grupos.materias.nombre")["reprobado"].mean() * 100
+
+        buffer = BytesIO()
+        c = canvas.Canvas(buffer, pagesize=letter)
+        c.setFont("Helvetica-Bold", 14)
+        c.drawString(180, 760, "Reporte Académico General - TecNM Tijuana")
+
+        y = 720
+        c.setFont("Helvetica-Bold", 12)
+        c.drawString(50, y, "Promedios por materia:")
+        y -= 20
+        c.setFont("Helvetica", 10)
+        for materia, valor in promedio.items():
+            c.drawString(70, y, f"- {materia}: {valor:.2f}")
+            y -= 15
+
+        y -= 20
+        c.setFont("Helvetica-Bold", 12)
+        c.drawString(50, y, "Porcentaje de reprobación:")
+        y -= 20
+        c.setFont("Helvetica", 10)
+        for materia, valor in reprob.items():
+            c.drawString(70, y, f"- {materia}: {valor:.1f}%")
+            y -= 15
+
+        c.save()
+        buffer.seek(0)
+        st.download_button(
+            label="📄 Descargar PDF Avanzado",
+            data=buffer,
+            file_name=ruta,
+            mime="application/pdf"
+        )
+    except Exception as e:
+        st.error(f"Error al generar reporte avanzado: {e}")

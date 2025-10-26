@@ -140,6 +140,19 @@ with tabs[3]:
 
         st.divider()
 
+        # ----- Análisis por materia (dentro de la misma pestaña) -----
+        # import arriba sería preferible, pero mantenerlo aquí también funciona
+        from graficos import grafico_promedio_materias, grafico_reprobacion_materias
+
+        st.subheader("📚 Análisis por Materia")
+        col1, col2 = st.columns(2)
+        with col1:
+            grafico_promedio_materias()
+        with col2:
+            grafico_reprobacion_materias()
+        
+
+
 
 # =====================================================================
 # 📄 TAB 5 - REPORTES
@@ -189,3 +202,5 @@ with tabs[5]:
 # =====================================================================
 with tabs[6]:
     vista_inscripciones()
+
+    
