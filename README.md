@@ -1,4 +1,3 @@
-# ExamenUnidad2_TemasAV_1raParte
 # Sistema de Análisis Educativo
 
 Aplicación web desarrollada en Python para el análisis académico y detección de factores de riesgo en estudiantes.  
