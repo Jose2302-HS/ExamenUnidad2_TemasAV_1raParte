@@ -53,3 +53,34 @@ pip install -r requirements.txt
 
 ## Ejecutar la aplicación:
 streamlit run app.py
+
+---
+
+## 📷 Capturas del Sistema
+
+## Inicio de Sesión
+![Inicio Sesión](images/InicioSesion)
+
+## Crear Usuario
+![Crear Usuario](images/CrearCuenta)
+
+## Dashboard Principal
+![Dashboard Principal](images/Dashboard1)
+
+## Dashboard Principal 2
+![Dashboard Principal](images/Dashboard2)
+
+## Registro Estudiantes
+![Registro Estudiantes](images/RegistroEstudiantes)
+
+## Registro Materias
+![Registro Materias](images/RegistroMaterias)
+
+## Exportar Reportes
+![Exportar Reportes](images/ExportarReportes)
+
+## Diagrama de Pareto
+![Diagrama de Pareto](images/DiagramaPareto)
+
+## Grafico de Control
+![Grafico de Control](images/GraficoControl)
