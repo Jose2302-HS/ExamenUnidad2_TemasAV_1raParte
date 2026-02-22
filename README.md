@@ -59,28 +59,28 @@ streamlit run app.py
 ## 📷 Capturas del Sistema
 
 ## Inicio de Sesión
-![Inicio Sesión](images/InicioSesion)
+![Inicio Sesión](images/InicioSesion.png)
 
 ## Crear Usuario
-![Crear Usuario](images/CrearCuenta)
+![Crear Usuario](images/CrearCuenta.png)
 
 ## Dashboard Principal
-![Dashboard Principal](images/Dashboard1)
+![Dashboard Principal](images/Dashboard1.png)
 
 ## Dashboard Principal 2
-![Dashboard Principal](images/Dashboard2)
+![Dashboard Principal](images/Dashboard2.png)
 
 ## Registro Estudiantes
-![Registro Estudiantes](images/RegistroEstudiantes)
+![Registro Estudiantes](images/RegistroEstudiantes.png)
 
 ## Registro Materias
-![Registro Materias](images/RegistroMaterias)
+![Registro Materias](images/RegistroMaterias.png)
 
 ## Exportar Reportes
-![Exportar Reportes](images/ExportarReportes)
+![Exportar Reportes](images/ExportarReportes.png)
 
 ## Diagrama de Pareto
-![Diagrama de Pareto](images/DiagramaPareto)
+![Diagrama de Pareto](images/DiagramaPareto.png)
 
 ## Grafico de Control
-![Grafico de Control](images/GraficoControl)
+![Grafico de Control](images/GraficoControl.png)
